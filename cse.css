@@ -1,0 +1,298 @@
+/* --- Global Styles and Theme Setup --- */
+:root {
+    --color-primary: #388e3c; /* A nice, dark green */
+    --color-light-green: #e8f5e9; /* Very light greenish-white for background */
+    --color-text: #212121;
+    --color-secondary: #00bcd4; /* Accent color */
+    --color-border: #c8e6c9; /* Light green border */
+    --color-shadow: rgba(0, 0, 0, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-light-green);
+    color: var(--color-text);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+.header {
+    background: var(--color-primary);
+    color: white;
+    padding: 20px 40px;
+    box-shadow: 0 4px 6px var(--color-shadow);
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
+/* --- Table Styling (Desktop View) --- */
+.table-container {
+    overflow-x: auto; /* Ensures horizontal scrolling on small screens if needed */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px var(--color-shadow);
+    padding: 20px;
+}
+
+#studentTable {
+    width: 100%;
+    border-collapse: separate; /* Use separate for rounded corners on rows */
+    border-spacing: 0;
+    min-width: 800px; /* Ensure table is wide enough on desktop */
+}
+
+/* Table Header */
+#studentTable thead {
+    position: sticky; /* Sticky header for better UX on long lists */
+    top: 0;
+    z-index: 10;
+}
+
+#studentTable th {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+/* Rounded corners for the header */
+#studentTable th:first-child { border-top-left-radius: 8px; }
+#studentTable th:last-child { border-top-right-radius: 8px; }
+
+/* Table Body (Modern and Impressive Rows) */
+#studentTable td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.85rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+#studentTable tbody tr:hover {
+    background-color: var(--color-light-green);
+    transform: scale(1.005);
+    box-shadow: 0 2px 5px var(--color-shadow);
+    cursor: pointer;
+    scroll-behavior: smooth;
+}
+
+/* Styling for specific columns */
+.group-cell {
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.attn-low { color: #d32f2f; font-weight: 600; } /* Red for low attendance */
+.attn-medium { color: #f9a825; } /* Amber for medium */
+.attn-high { color: var(--color-primary); font-weight: 500; } /* Green for high */
+
+/* Behaviour Pills */
+.behavior-cell span {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+}
+
+.excellent { background-color: #2e7d32; } /* Dark Green */
+.good { background-color: #1565c0; } /* Blue */
+.satisfactory { background-color: #ffa000; } /* Amber */
+.needs-improvement { background-color: #c62828; } /* Red */
+
+/* Remove bottom border for the last row */
+#studentTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Footer Note */
+.footer-note {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    color: #757575;
+    font-size: 0.8rem;
+    border-top: 1px solid var(--color-border);
+}
+
+/* --- Mobile-Friendly Design (Media Queries) --- */
+
+/* Hide the main table and use the card-style list on smaller screens */
+.table-header {
+    display: none; /* Hidden by default on desktop */
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+
+    .header h1 {
+        font-size: 1.4rem;
+    }
+
+    .table-container {
+        box-shadow: none; /* Lighter look on mobile */
+        padding: 0;
+        background: none;
+    }
+
+    #studentTable {
+        border: none;
+        min-width: unset;
+    }
+
+    #studentTable thead {
+        display: none; /* Hide the full table header */
+    }
+
+    /* Show the simplified mobile header */
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--color-primary);
+        color: white;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+    
+    .table-header span {
+        flex: 1;
+        text-align: center;
+    }
+
+    .header-sno { flex: 0.5; }
+    .header-name { flex: 2; text-align: left; }
+    .header-adm { flex: 1.5; }
+    .header-attn { flex: 1; }
+
+
+    /* Convert table rows to "cards" (Mobile-Card View) */
+    #studentTable, #studentTable tbody, #studentTable tr, #studentTable td {
+        display: block;
+        width: 100%;
+    }
+
+    #studentTable tr {
+        background-color: #fff;
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        margin-bottom: 15px;
+        padding: 15px;
+        box-shadow: 0 4px 8px var(--color-shadow);
+        position: relative;
+        transition: none; /* Remove hover effect for mobile */
+    }
+
+    #studentTable tr:hover {
+        transform: none;
+        background-color: #fff;
+    }
+
+    #studentTable td {
+        border-bottom: none;
+        padding: 5px 0;
+        text-align: right;
+        font-size: 0.9rem;
+    }
+
+    #studentTable td::before {
+        content: attr(data-label); /* Use data-label for the field name */
+        float: left;
+        font-weight: bold;
+        color: var(--color-primary);
+        padding-right: 10px;
+    }
+
+    /* Style the main info for the simplified card view */
+    .card-main-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        border-bottom: 1px dashed var(--color-border);
+        padding-bottom: 10px;
+    }
+
+    /* Hide less important fields for the main card view and simplify */
+    .mobile-hidden { display: none; }
+    .sno-mobile { position: absolute; top: 10px; left: 15px; font-size: 1.1rem; font-weight: bold; color: var(--color-primary); }
+
+    /* Specific overrides for card layout */
+    td:nth-child(1) { /* S.No */
+        display: none;
+    }
+    td:nth-child(2) { /* Group */
+        display: none;
+    }
+    td:nth-child(3) { /* Student Name */
+        text-align: left;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding-top: 0;
+    }
+    td:nth-child(3)::before {
+        content: ''; /* Remove label for name */
+    }
+    td:nth-child(4) { /* Admission Number */
+        order: 1;
+        text-align: right;
+        font-weight: normal;
+        font-size: 0.9rem;
+    }
+    td:nth-child(4)::before {
+        content: 'Adm No:';
+        color: #757575;
+        font-weight: normal;
+    }
+    td:nth-child(5) { /* Attendance */
+        order: 2;
+        padding-top: 10px;
+        border-top: 1px solid var(--color-border);
+    }
+    td:nth-child(6) { /* Contact */
+        order: 4;
+    }
+    td:nth-child(7) { /* Behaviour */
+        order: 3;
+    }
+    
+    .behavior-cell {
+        text-align: left !important;
+    }
+
+    .behavior-cell span {
+        margin-top: 5px;
+    }
+
+    .behavior-cell::before {
+        float: none;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+}
